@@ -8,6 +8,7 @@ import ActiveCollaborators from '../ActiveCollaborators';
 import { useState,useRef, useEffect } from 'react';
 import Image from 'next/image';
 import { updateDocument } from '@/lib/actions/room.actions';
+import Loader from '../loader';
 // import{input} from './ui/input';
 const CollaborativeRoom = ({roomId, roomMetadata}: CollaborativeRoomProps) => {
 
@@ -64,7 +65,7 @@ setLoading(false);
   return (
     <RoomProvider id = {roomId}>
 
-    <ClientSideSuspense fallback={<div>Loading…</div>}>
+    <ClientSideSuspense fallback={<Loader/>}>
 
       <div className='collaborative-room'>
       <Header>
