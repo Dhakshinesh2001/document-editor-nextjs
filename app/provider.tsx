@@ -1,5 +1,5 @@
 'use client';
-import { LiveblocksProvider, RoomProvider } from '@liveblocks/react'
+import { LiveblocksProvider} from '@liveblocks/react'
 import { ClientSideSuspense } from '@liveblocks/react'
 import Loader from '../components/loader'
 import { getClerkUsers } from '../lib/actions/user.actions'

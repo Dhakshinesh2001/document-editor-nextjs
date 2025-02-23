@@ -3,7 +3,7 @@
 import { nanoid } from 'nanoid'
 import { liveblocks } from '../liveblocks';
 import { revalidatePath } from 'next/cache';
-import { getAccessType, parseStringify } from '../utils';
+import {parseStringify } from '../utils';
 // import { redirect } from 'next/navigation';
 
 export const createDocument = async ({ userId, email}:CreateDocumentParams) => {
@@ -42,10 +42,11 @@ export const getDocument = async ({ roomId, userId }: { roomId: string, userId: 
   try {
       const room = await liveblocks.getRoom(roomId);
   
-      const hasAccess = Object.keys(room.usersAccesses).includes(userId);
-      if (!hasAccess) {
-          throw new Error('You do not have access to this room');
-      }
+    //   const hasAccess = Object.keys(room.usersAccesses).includes(userId);
+    //   if (!hasAccess) {
+    //       throw new Error('You do not have access to this room');
+    //   }
+    // uncomment this to allow all users to access the room
   
       return parseStringify(room);
   }
@@ -54,3 +55,41 @@ export const getDocument = async ({ roomId, userId }: { roomId: string, userId: 
     
   }
 }
+
+export const updateDocument = async (roomId: string, title: string) => {
+  try {
+    
+    
+    const updatedRoom = await liveblocks.updateRoom(roomId, {
+      metadata: {
+        title,
+        }
+    });
+
+    revalidatePath(`/documents/${roomId}`);
+
+    return parseStringify(updatedRoom);
+  } catch (error) {
+    console.log(`error while updating room: ${error}`);
+  }
+};
+
+export const getDocumentS = async ( email: string ) => {
+    try {
+        const rooms = await liveblocks.getRooms({
+            userId: email,
+        });
+    
+      //   const hasAccess = Object.keys(room.usersAccesses).includes(userId);
+      //   if (!hasAccess) {
+      //       throw new Error('You do not have access to this room');
+      //   }
+      // uncomment this to allow all users to access the room
+    
+        return parseStringify(rooms);
+    }
+     catch (error) {
+        console.log(`error while fetching room: ${error}`);
+      
+    }
+  }

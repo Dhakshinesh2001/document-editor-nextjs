@@ -5,8 +5,7 @@ import React from 'react'
 const ActiveCollaborators = () => {
 
 const others = useOthers();
-const collaborators = others.map((other) => {
-    other.info});
+const collaborators = others.map((other) => {return other.info});
 
 
   return (

@@ -2,6 +2,7 @@
 
 import { clerkClient } from "@clerk/nextjs/server";
 import { parseStringify } from "../utils";
+// import { User } from "@liveblocks/node";
 
 export const getClerkUsers = async ({userIds}: {userIds: string[]})=>{
 

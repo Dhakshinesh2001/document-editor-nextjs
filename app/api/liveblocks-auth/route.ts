@@ -9,7 +9,7 @@ export async function POST(request: Request) {
   const clerkUser = await currentUser();
 
   if(!clerkUser) {
-    redirect('/sign-in');
+    redirect('/sign-in'); 
   }
 
  
