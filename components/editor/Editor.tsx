@@ -14,6 +14,9 @@ import { liveblocksConfig, LiveblocksPlugin } from '@liveblocks/react-lexical';
 import Loader from '../loader';
 import {useIsEditorReady} from "@liveblocks/react-lexical";
 import FloatingToolbar from './plugins/FloatingToolbarPlugin';
+import { FloatingComposer,FloatingThreads } from '@liveblocks/react-lexical';
+import { useThreads } from '@liveblocks/react/suspense';
+import Comments from '../Comments';
 
 // Catch any errors that occur during Lexical updates and log them
 // or throw them as needed. If you don't throw them, Lexical will
@@ -25,6 +28,7 @@ function Placeholder() {
 
 export function Editor({roomId, currentUserType}: {roomId: string, currentUserType: UserType}) {
   const isReady = useIsEditorReady();
+  const { threads } = useThreads();
   // console.log("currentUserType=>")
   // console.log(currentUserType);
   const initialConfig = liveblocksConfig({
@@ -67,7 +71,10 @@ export function Editor({roomId, currentUserType}: {roomId: string, currentUserTy
       )}
 
         <LiveblocksPlugin>
+          <FloatingComposer className='w-[350px]'/>
 
+          <FloatingThreads threads={threads} />
+          <Comments />
         </LiveblocksPlugin>
        
         </div>
