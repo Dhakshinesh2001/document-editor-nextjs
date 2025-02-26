@@ -30,7 +30,7 @@ const Document = async ({ params }: SearchParamProps) => {
     userType: room.usersAccesses[user.email]?.includes('room:write') ? 'editor' : 'viewer',
   }))
 
-  const curreUserType = room.usersAccesses[clerkUser.emailAddresses[0].emailAddress]?.includes('room:write') ? 'editor' : 'viewer';
+  const currentUserType = room.usersAccesses[clerkUser.emailAddresses[0].emailAddress]?.includes('room:write') ? 'editor' : 'viewer';
 
   return (
     <main className='flex w-full flex-col items-center'>
@@ -38,7 +38,7 @@ const Document = async ({ params }: SearchParamProps) => {
           roomId={id}
           roomMetadata={room.metadata}
           users={usersData}
-          currentUserType={curreUserType}
+          currentUserType={currentUserType}
           />
     </main>
   )
