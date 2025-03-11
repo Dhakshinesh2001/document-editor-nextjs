@@ -1,6 +1,6 @@
 import React from 'react'
-import CollaborativeRoom from '@/components/ui/CollaborativeRoom'
-import { currentUser } from '@clerk/nextjs/server'
+import CollaborativeRoom from '@/components/CollaborativeRoom'
+import { currentUser} from '@clerk/nextjs/server'
 import { redirect } from 'next/navigation'
 import { getDocument } from '@/lib/actions/room.actions'
 import { getClerkUsers } from '@/lib/actions/user.actions'
@@ -24,10 +24,11 @@ const Document = async ({ params }: SearchParamProps) => {
   const userIds = Object.keys(room.usersAccesses);
   console.log(userIds);
   const users= await getClerkUsers({userIds});
-
   const usersData = users.map((user: User)=>({
     ...user,
-    userType: room.usersAccesses[user.email]?.includes('room:write') ? 'editor' : 'viewer',
+    userType: room.usersAccesses[user.email]?.includes('room:write')
+     ? 'editor' 
+     : 'viewer',
   }))
 
   const currentUserType = room.usersAccesses[clerkUser.emailAddresses[0].emailAddress]?.includes('room:write') ? 'editor' : 'viewer';

@@ -4,11 +4,12 @@ import { RoomProvider, ClientSideSuspense } from '@liveblocks/react'
 import { SignedIn, SignedOut, UserButton, SignInButton } from '@clerk/nextjs'
 import { Editor } from '@/components/editor/Editor'
 import Header from '@/components/header'
-import ActiveCollaborators from '../ActiveCollaborators';
+import ActiveCollaborators from './ActiveCollaborators';
 import { useState,useRef, useEffect } from 'react';
 import Image from 'next/image';
 import { updateDocument } from '@/lib/actions/room.actions';
-import Loader from '../loader';
+import Loader from './loader'
+import ShareModal from './ShareModal';
 // import{input} from './ui/input';
 const CollaborativeRoom = ({roomId, roomMetadata, users, currentUserType}: CollaborativeRoomProps) => {
 
@@ -109,7 +110,12 @@ setLoading(false);
             }
           </div>
           <div className='flex w-full flex-1 justify-end gap-2 sm:gap-3'>
-            <ActiveCollaborators />
+            <ActiveCollaborators />            <ShareModal
+              roomId={roomId}
+              collaborators={users}
+              creatorId={roomMetadata.creatorId}
+              currentUserType={currentUserType}
+            />
             <SignedOut>
             <SignInButton />
           </SignedOut>
