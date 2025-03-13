@@ -25,10 +25,7 @@
     ],
     "paths": {
       "@/*": ["./*"]
-    },
-    "ignoreDiagnostics": [
-      // Add specific TypeScript error codes to ignore, e.g., 2307 for missing module
-    ]
+    }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
   "exclude": ["node_modules"]
